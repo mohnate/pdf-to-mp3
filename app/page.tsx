@@ -1,3 +1,11 @@
-export default function Home() {
-  return <div>test</div>;
-}
+import GenerateSpeechUi from "./components/GenerateSpeechUi";
+
+const Home = () => {
+  return (
+    <div>
+      <GenerateSpeechUi />
+    </div>
+  );
+};
+
+export default Home;
