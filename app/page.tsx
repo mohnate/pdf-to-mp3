@@ -5,7 +5,7 @@ import { Hero } from "./components/Hero";
 
 const Home = () => {
   return (
-    <div className="bg-black text-white overflow-hidden max-w-full">
+    <div className="bg-black overflow-hidden max-w-full text-white">
       <Header />
       <Hero />
       <GenerateSpeechUi />

@@ -90,158 +90,160 @@ const GenerateSpeechUi = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 max-w-full overflow-hidden">
-      <h1 className="text-2xl font-bold mb-4">PDF to MP3 Generator</h1>
-      <div className="flex flex-wrap space-x-4 mb-4">
-        <label className="flex items-center">
-          <input
-            type="radio"
-            name="inputType"
-            value="text"
-            checked={inputType === "text"}
-            onChange={() => setInputType("text")}
-            className="mr-2"
-          />
-          Text Input
-        </label>
-        <label className="flex items-center">
-          <input
-            type="radio"
-            name="inputType"
-            value="pdf"
-            checked={inputType === "pdf"}
-            onChange={() => setInputType("pdf")}
-            className="mr-2"
-          />
-          PDF Input
-        </label>
-      </div>
-
-      {inputType === "text" && (
-        <div className="mb-4 p-4 border rounded shadow-sm min-h-[300px] max-w-full flex flex-col justify-between">
-          <div className="flex flex-col gap-4">
-            <Textarea
-              className="w-full p-2 border rounded mb-2"
-              value={textInput}
-              name="text-input"
-              onChange={(e) => setTextInput(e.target.value)}
-              placeholder="Enter text"
-            />
-            <Select onValueChange={(value) => setVoice(value)}>
-              <SelectTrigger className="w-full p-2 border rounded mb-2">
-                <SelectValue placeholder="Select Voice" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="alloy">Alloy</SelectItem>
-                <SelectItem value="echo">Echo</SelectItem>
-                <SelectItem value="fable">Fable</SelectItem>
-                <SelectItem value="onyx">Onyx</SelectItem>
-                <SelectItem value="nova">Nova</SelectItem>
-                <SelectItem value="shimmer">Shimmer</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <button
-            onClick={handleGenerateFromText}
-            className="w-full bg-blue-500 text-white p-2 rounded flex items-center justify-center"
-          >
-            {loading ? (
-              <svg
-                className="animate-spin h-5 w-5 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                ></circle>
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zM2 12a10 10 0 0110-10v4a6 6 0 00-6 6H2z"
-                ></path>
-              </svg>
-            ) : (
-              "Generate Audio"
-            )}
-          </button>
-        </div>
-      )}
-
-      {inputType === "pdf" && (
-        <div className="mb-4 p-4 border rounded shadow-sm min-h-[300px] max-w-full flex flex-col justify-between">
-          <div className="flex flex-col gap-4">
+    <div className="flex flex-col items-center m-10">
+      <div className="flex flex-col justify-between">
+        <h1 className="md:text-2xl font-bold mb-4">
+          Easily transform your Text Or PDFs into MP3s.
+        </h1>
+        <div className="flex flex-wrap space-x-4 mb-4">
+          <label className="flex items-center">
             <input
-              type="file"
-              accept="application/pdf"
-              onChange={handleFileChange}
-              className="w-full p-2 border rounded mb-2"
+              type="radio"
+              name="inputType"
+              value="text"
+              checked={inputType === "text"}
+              onChange={() => setInputType("text")}
+              className="mr-2"
             />
-            <Select onValueChange={(value) => setVoice(value)}>
-              <SelectTrigger className="w-full p-2 border rounded mb-2">
-                <SelectValue placeholder="Select Voice" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="alloy">Alloy</SelectItem>
-                <SelectItem value="echo">Echo</SelectItem>
-                <SelectItem value="fable">Fable</SelectItem>
-                <SelectItem value="onyx">Onyx</SelectItem>
-                <SelectItem value="nova">Nova</SelectItem>
-                <SelectItem value="shimmer">Shimmer</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <button
-            onClick={handleGenerateFromPdf}
-            className="w-full bg-blue-500 text-white p-2 rounded flex items-center justify-center"
-          >
-            {loading ? (
-              <svg
-                className="animate-spin h-5 w-5 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                ></circle>
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zM2 12a10 10 0 0110-10v4a6 6 0 00-6 6H2z"
-                ></path>
-              </svg>
-            ) : (
-              "Generate Audio"
-            )}
-          </button>
+            Text Input
+          </label>
+          <label className="flex items-center">
+            <input
+              type="radio"
+              name="inputType"
+              value="pdf"
+              checked={inputType === "pdf"}
+              onChange={() => setInputType("pdf")}
+              className="mr-2"
+            />
+            PDF Input
+          </label>
         </div>
-      )}
 
-      {audioUrl && (
-        <div className="mt-4 max-w-full">
-          <audio controls className="w-full">
-            <source src={audioUrl} type="audio/mpeg" />
-            Your browser does not support the audio element.
-          </audio>
-          <button
-            onClick={handleDownload}
-            className="w-full my-4 bg-white text-black p-2 rounded"
-          >
-            Download Audio
-          </button>
-        </div>
-      )}
+        {inputType === "text" && (
+          <div className="max-w-full flex flex-col justify-between">
+            <div className="flex flex-col gap-4">
+              <p>
+                Type your text and we'll convert it into a downloadable MP3!{" "}
+              </p>
+              <Select onValueChange={(value) => setVoice(value)}>
+                <SelectTrigger className="w-full p-2 border rounded mb-2">
+                  <SelectValue placeholder="Select a voice to narrate your text." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="alloy">Alloy</SelectItem>
+                  <SelectItem value="echo">Echo</SelectItem>
+                  <SelectItem value="fable">Fable</SelectItem>
+                  <SelectItem value="onyx">Onyx</SelectItem>
+                  <SelectItem value="nova">Nova</SelectItem>
+                  <SelectItem value="shimmer">Shimmer</SelectItem>
+                </SelectContent>
+              </Select>
+              <Textarea
+                className="w-full p-2 border rounded mb-2"
+                value={textInput}
+                name="text-input"
+                onChange={(e) => setTextInput(e.target.value)}
+                placeholder="Type or paste your text here..."
+              />
+            </div>
+            <div className="my-10">
+              {!loading ? (
+                <p className="pb-10">
+                  🎧 Turn your PDFs and text into MP3s! 📚➡️🎶 Enjoy your
+                  documents on the go by converting them into audio files.
+                  Perfect for multitasking and making the most of your time!
+                </p>
+              ) : (
+                <p className="pb-10">
+                  🔄 Converting your text into audio... 🎧 Sit back and relax,
+                  we’re almost there!
+                </p>
+              )}
+              <button
+                onClick={handleGenerateFromText}
+                className="w-full bg-blue-500 text-white my-5 p-2 rounded flex items-center justify-center"
+              >
+                {loading ? (
+                  <span className="loading loading-dots loading-lg"></span>
+                ) : (
+                  "Generate Audio"
+                )}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {inputType === "pdf" && (
+          <div className="max-w-full flex flex-col h-7[500px] justify-between">
+            <div className="flex flex-col gap-4">
+              <p>
+                Upload your PDF document and we'll create a downloadable MP3 for
+                you!{" "}
+              </p>
+
+              <Select onValueChange={(value) => setVoice(value)}>
+                <SelectTrigger className="w-full p-2 border rounded mb-2">
+                  <SelectValue placeholder="Select a voice to narrate your PDF file." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="alloy">Alloy</SelectItem>
+                  <SelectItem value="echo">Echo</SelectItem>
+                  <SelectItem value="fable">Fable</SelectItem>
+                  <SelectItem value="onyx">Onyx</SelectItem>
+                  <SelectItem value="nova">Nova</SelectItem>
+                  <SelectItem value="shimmer">Shimmer</SelectItem>
+                </SelectContent>
+              </Select>
+              <input
+                type="file"
+                accept="application/pdf"
+                onChange={handleFileChange}
+                className="file-input file-input-bordered file-input-info w-full max-w-xs"
+              />
+            </div>
+            <div className="my-10">
+              {!loading ? (
+                <p className="">
+                  🎧 Turn your PDFs and text into MP3s! 📚➡️🎶 Enjoy your
+                  documents on the go by converting them into audio files.
+                  Perfect for multitasking and making the most of your time!
+                </p>
+              ) : (
+                <p className="">
+                  🔄 Converting your text into audio... 🎧 Sit back and relax,
+                  we’re almost there!
+                </p>
+              )}
+              <button
+                onClick={handleGenerateFromPdf}
+                className="w-full bg-blue-500 text-white my-5 p-2 rounded flex items-center justify-center"
+              >
+                {loading ? (
+                  <span className="loading loading-dots loading-lg"></span>
+                ) : (
+                  "Generate Audio"
+                )}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {audioUrl && (
+          <div className="mt-4 max-w-full">
+            <audio controls className="w-full">
+              <source src={audioUrl} type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+            <button
+              onClick={handleDownload}
+              className="w-full my-4 bg-white text-black p-2 rounded"
+            >
+              Download Audio
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
