@@ -64,7 +64,7 @@ const SampleMp3Voices: React.FC = () => {
     }
 
     gsap.fromTo(
-      btnRefs.current,
+      btnRefs.current.filter((el) => el !== null),
       {
         opacity: 0,
         y: 10,
@@ -83,7 +83,7 @@ const SampleMp3Voices: React.FC = () => {
 
   return (
     <div className="lg:m-[100px] mx-10 mt-0 pt-0">
-      <h2 ref={textRef} className="lg:text-2xl font-bold mb-10  text-white ">
+      <h2 ref={textRef} className="lg:text-2xl font-bold mb-10 text-white">
         {textDescription.split(" ").map((word, i) => (
           <span key={i} className="inline-block mr-2">
             {word}
@@ -94,7 +94,9 @@ const SampleMp3Voices: React.FC = () => {
         {voiceSamples.map((sample, index) => (
           <li key={sample.name} className="flex items-center space-x-4">
             <button
-              ref={(el) => (btnRefs.current[index] = el)}
+              ref={(el) => {
+                btnRefs.current[index] = el;
+              }}
               className={`flex justify-between items-center mb-4 h-12 lg:w-[205px] rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 w-full ${
                 currentSample === sample.url ? "" : ""
               }`}

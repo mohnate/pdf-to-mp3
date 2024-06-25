@@ -138,7 +138,8 @@ const GenerateSpeechUi = () => {
             <div className="max-w-full flex flex-col justify-between">
               <div className="flex flex-col gap-4">
                 <p>
-                  Type your text and we'll convert it into a downloadable MP3!{" "}
+                  Type your text and we&apos;ll convert it into a downloadable
+                  MP3!{" "}
                 </p>
                 <Select onValueChange={(value) => setVoice(value)}>
                   <SelectTrigger className="w-full p-2 border rounded mb-2">
@@ -189,11 +190,11 @@ const GenerateSpeechUi = () => {
           )}
 
           {inputType === "pdf" && (
-            <div className="max-w-full flex flex-col h-7[500px] justify-between">
+            <div className="max-w-full flex flex-col h-[500px] justify-between">
               <div className="flex flex-col gap-4">
                 <p>
-                  Upload your PDF document and we'll create a downloadable MP3
-                  for you!{" "}
+                  Upload your PDF document and we&apos;ll create a downloadable
+                  MP3 for you!{" "}
                 </p>
 
                 <Select onValueChange={(value) => setVoice(value)}>

@@ -45,7 +45,7 @@ export function Hero() {
           ref={heroTextRef2}
           className="text-base md:text-lg mt-4 text-white font-normal text-center"
         >
-          Type it, convert it, download it – it's that easy!
+          Type it, convert it, download it – it&apos;s that easy!
         </p>
       </WavyBackground>
     </div>
