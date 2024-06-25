@@ -18,7 +18,7 @@ const GenerateSpeechUi = () => {
   const [inputType, setInputType] = useState<"text" | "pdf">("text");
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [voice, setVoice] = useState("alloy");
-  const [audioUrl, setAudioUrl] = useState<string | null>(true);
+  const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [textInput, setTextInput] = useState("");
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
   const [loading, setLoading] = useState(false);
@@ -97,8 +97,7 @@ const GenerateSpeechUi = () => {
   };
 
   return (
-    <div className="flex flex-col items-center m-10">
-      <SampleMp3Voices />
+    <div className="flex flex-col items-center lg:m-[100px] bg-slate-50 rounded-lg p-8">
       {audioUrl ? (
         <DownloadAudio
           audioUrl={audioUrl}
@@ -214,7 +213,7 @@ const GenerateSpeechUi = () => {
                   type="file"
                   accept="application/pdf"
                   onChange={handleFileChange}
-                  className="file-input file-input-bordered file-input-info w-full max-w-xs"
+                  className="file-input file-input-bordered file-input-info w-full max-w-xs text-white"
                 />
               </div>
               <div className="my-10">
