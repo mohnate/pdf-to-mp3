@@ -31,14 +31,16 @@ const SampleMp3Voices: React.FC = () => {
 
   const playSample = (url: string) => {
     const audio = new Audio(url);
-    setCurrentSample(url);
-    setIsPlaying(true);
+    if (!isPlaying) {
+      setCurrentSample(url);
+      setIsPlaying(true);
 
-    audio.play();
-    audio.addEventListener("ended", () => {
-      setCurrentSample(null);
-      setIsPlaying(false);
-    });
+      audio.play();
+      audio.addEventListener("ended", () => {
+        setCurrentSample(null);
+        setIsPlaying(false);
+      });
+    }
   };
 
   useGSAP(() => {
@@ -97,7 +99,7 @@ const SampleMp3Voices: React.FC = () => {
               ref={(el) => {
                 btnRefs.current[index] = el;
               }}
-              className={`flex justify-between items-center mb-4 h-12 lg:w-[205px] rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 w-full ${
+              className={`flex justify-between items-center mb-4 h-12 lg:w-[205px] rounded-md border border-slate-800 hover:bg-slate-600 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 w-full ${
                 currentSample === sample.url ? "" : ""
               }`}
               onClick={() => playSample(sample.url)}
