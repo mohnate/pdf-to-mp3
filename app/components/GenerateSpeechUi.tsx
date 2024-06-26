@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useAction } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import extractTextFromPdf from "../../app/extractTextFromPdf";
+import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf";
 import { Textarea } from "../components/ui/TextArea";
 import {
   Select,
@@ -12,6 +12,9 @@ import {
   SelectValue,
 } from "../components/ui/Select";
 import DownloadAudio from "../components/DownloadAudio";
+
+// Set the workerSrc property to specify the location of the worker script
+pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdfjs/pdf.worker.min.mjs";
 
 const GenerateSpeechUi = () => {
   const [inputType, setInputType] = useState<"text" | "pdf">("text");
@@ -26,6 +29,21 @@ const GenerateSpeechUi = () => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
     setPdfFile(file);
+  };
+
+  const extractTextFromPdf = async (file: File) => {
+    const arrayBuffer = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+    let text = "";
+
+    for (let i = 0; i < pdf.numPages; i++) {
+      const page = await pdf.getPage(i + 1);
+      const content = await page.getTextContent();
+      const strings = content.items.map((item: any) => item.str).join(" ");
+      text += strings + " ";
+    }
+
+    return text;
   };
 
   const handleGenerateFromText = async () => {

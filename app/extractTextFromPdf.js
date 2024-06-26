@@ -1,4 +1,4 @@
-import * as pdfjsLib from "pdfjs-dist/webpack";
+import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf"; // Use the legacy build
 
 const extractTextFromPdf = async (file) => {
   const arrayBuffer = await file.arrayBuffer();
