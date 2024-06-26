@@ -12,11 +12,14 @@ import {
   SelectValue,
 } from "../components/ui/Select";
 import DownloadAudio from "../components/DownloadAudio";
+import { useUser } from "@clerk/clerk-react";
+import LoginPrompt from "./LoginPrompt";
 
 // Set the workerSrc property to specify the location of the worker script
 pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdfjs/pdf.worker.min.mjs";
 
 const GenerateSpeechUi = () => {
+  const { isSignedIn } = useUser();
   const [inputType, setInputType] = useState<"text" | "pdf">("text");
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [voice, setVoice] = useState("alloy");
@@ -24,6 +27,8 @@ const GenerateSpeechUi = () => {
   const [textInput, setTextInput] = useState("");
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
   const [loading, setLoading] = useState(false);
+  const [attempts, setAttempts] = useState(0);
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false);
   const generateAudio = useAction(api.generateSpeech.generateAudioAction);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,6 +52,11 @@ const GenerateSpeechUi = () => {
   };
 
   const handleGenerateFromText = async () => {
+    if (!isSignedIn && attempts >= 3) {
+      setShowLoginPrompt(true);
+      return;
+    }
+
     setLoading(true);
     try {
       const buffer = await generateAudio({ input: textInput, voice });
@@ -54,6 +64,7 @@ const GenerateSpeechUi = () => {
       const url = URL.createObjectURL(blob);
       setAudioUrl(url);
       setAudioBlob(blob);
+      setAttempts(attempts + 1);
     } catch (error) {
       console.error("Error generating audio:", error);
     } finally {
@@ -62,6 +73,11 @@ const GenerateSpeechUi = () => {
   };
 
   const handleGenerateFromPdf = async () => {
+    if (!isSignedIn && attempts >= 3) {
+      setShowLoginPrompt(true);
+      return;
+    }
+
     if (!pdfFile) {
       alert("Please upload a PDF file.");
       return;
@@ -75,6 +91,7 @@ const GenerateSpeechUi = () => {
       const url = URL.createObjectURL(blob);
       setAudioUrl(url);
       setAudioBlob(blob);
+      setAttempts(attempts + 1);
     } catch (error) {
       console.error("Error generating audio:", error);
     } finally {
@@ -246,6 +263,9 @@ const GenerateSpeechUi = () => {
             </div>
           )}
         </div>
+      )}
+      {showLoginPrompt && (
+        <LoginPrompt onClose={() => setShowLoginPrompt(false)} />
       )}
     </div>
   );
