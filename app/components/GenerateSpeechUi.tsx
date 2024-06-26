@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useAction } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import * as pdfjsLib from "pdfjs-dist/webpack";
+import extractTextFromPdf from "../../app/extractTextFromPdf";
 import { Textarea } from "../components/ui/TextArea";
 import {
   Select,
@@ -11,7 +11,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../components/ui/Select";
-import SampleMp3Voices from "./VoiceSamples";
 import DownloadAudio from "../components/DownloadAudio";
 
 const GenerateSpeechUi = () => {
@@ -27,21 +26,6 @@ const GenerateSpeechUi = () => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
     setPdfFile(file);
-  };
-
-  const extractTextFromPdf = async (file: File) => {
-    const arrayBuffer = await file.arrayBuffer();
-    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-    let text = "";
-
-    for (let i = 0; i < pdf.numPages; i++) {
-      const page = await pdf.getPage(i + 1);
-      const content = await page.getTextContent();
-      const strings = content.items.map((item: any) => item.str).join(" ");
-      text += strings + " ";
-    }
-
-    return text;
   };
 
   const handleGenerateFromText = async () => {
