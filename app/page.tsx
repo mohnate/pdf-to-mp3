@@ -7,7 +7,7 @@ import SampleMp3Voices from "./components/VoiceSamples";
 
 const Home = () => {
   return (
-    <div className="bg-black overflow-hidden max-w-full min-h-screen">
+    <div className=" overflow-hidden max-w-full min-h-screen">
       <Header />
       <Hero />
       <SampleMp3Voices />

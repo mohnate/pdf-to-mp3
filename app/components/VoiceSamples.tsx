@@ -85,7 +85,7 @@ const SampleMp3Voices: React.FC = () => {
 
   return (
     <div className="lg:m-[100px] mx-10 mt-0 pt-0">
-      <h2 ref={textRef} className="lg:text-2xl font-bold mb-10 text-white">
+      <h2 ref={textRef} className="lg:text-2xl font-bold mb-10 ">
         {textDescription.split(" ").map((word, i) => (
           <span key={i} className="inline-block mr-2">
             {word}

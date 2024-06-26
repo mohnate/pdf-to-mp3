@@ -37,13 +37,13 @@ export function Hero() {
       <WavyBackground className="absolute">
         <p
           ref={heroTextRef1}
-          className="text-2xl md:text-4xl lg:text-7xl text-white font-bold text-center"
+          className="text-2xl md:text-4xl lg:text-5xl font-black text-center"
         >
-          Turn your words into music with a click!
+          Convert PDF or Text to MP3 And Download it online For Free!
         </p>
         <p
           ref={heroTextRef2}
-          className="text-base md:text-lg mt-4 text-white font-normal text-center"
+          className="text-base md:text-lg mt-4  font-bold text-center"
         >
           Type it, convert it, download it – it&apos;s that easy!
         </p>
