@@ -28,7 +28,7 @@ const GenerateSpeechUi = () => {
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
   const [loading, setLoading] = useState(false);
   const [attempts, setAttempts] = useState(0);
-  const [showLoginPrompt, setShowLoginPrompt] = useState(false);
+  const [showLoginPrompt, setShowLoginPrompt] = useState(true);
   const generateAudio = useAction(api.generateSpeech.generateAudioAction);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
