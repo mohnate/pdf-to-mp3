@@ -4,6 +4,8 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SignInButton, UserButton } from "@clerk/clerk-react";
+import { Authenticated, Unauthenticated, useQuery } from "convex/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,19 +30,20 @@ const Header = () => {
   });
 
   return (
-    <header className="bg-gradient-to-r from-purple-500 to-blue-500 bg-black text-white p-4 m-10 rounded-full">
+    <header className="  p-4">
       <div className="container relative mx-auto flex justify-between items-center px-4 ">
         <div className="flex items-center cursor-pointer hover:text-purple-400 transition duration-300">
           <Image src="/favicon.ico" alt="logo" width={32} height={32} />
           <h1 className="md:text-2xl font-bold  ml-2">PDF to MP3 Generator</h1>
         </div>
+
         <div className="flex space-x-4">
-          <button className="bg-white text-black px-4 py-2 rounded hover:bg-purple-400 transition duration-300">
-            Button
-          </button>
-          <button className="bg-white text-black px-4 py-2 rounded hover:bg-purple-400 transition duration-300">
-            Button
-          </button>
+          <Unauthenticated>
+            <SignInButton mode="modal" />
+          </Unauthenticated>
+          <Authenticated>
+            <UserButton />
+          </Authenticated>
         </div>
       </div>
     </header>

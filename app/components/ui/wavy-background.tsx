@@ -4,6 +4,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { createNoise3D } from "simplex-noise";
 
 export const WavyBackground = ({
+  width,
+  height,
   children,
   className,
   containerClassName,
@@ -49,13 +51,13 @@ export const WavyBackground = ({
   const init = () => {
     canvas = canvasRef.current;
     ctx = canvas.getContext("2d");
-    w = ctx.canvas.width = window.innerWidth;
-    h = ctx.canvas.height = window.innerHeight;
+    w = ctx.canvas.width = width || window.innerWidth;
+    h = ctx.canvas.height = height || window.innerHeight;
     ctx.filter = `blur(${blur}px)`;
     nt = 0;
     window.onresize = function () {
-      w = ctx.canvas.width = window.innerWidth;
-      h = ctx.canvas.height = window.innerHeight;
+      w = ctx.canvas.width = width || window.innerWidth;
+      h = ctx.canvas.height = height || window.innerHeight;
       ctx.filter = `blur(${blur}px)`;
     };
     render();

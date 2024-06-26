@@ -33,8 +33,8 @@ export function Hero() {
   });
 
   return (
-    <div className="max-w-full mx-auto overflow-hidden relative">
-      <WavyBackground className="absolute">
+    <div className="max-w-full mx-auto overflow-hidden relative h-[500px]">
+      <WavyBackground height={650} className="absolute">
         <p
           ref={heroTextRef1}
           className="text-2xl md:text-4xl lg:text-5xl font-black text-center"
@@ -43,7 +43,7 @@ export function Hero() {
         </p>
         <p
           ref={heroTextRef2}
-          className="text-base md:text-lg mt-4  font-bold text-center"
+          className="text-base md:text-lg mt-4 text-gray-500 font-bold text-center"
         >
           Type it, convert it, download it – it&apos;s that easy!
         </p>

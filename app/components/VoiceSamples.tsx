@@ -1,7 +1,10 @@
+"use client";
+import { cn } from "../utils/cn";
+import React, { useEffect, useRef, useState } from "react";
+import { createNoise3D } from "simplex-noise";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useState, useRef } from "react";
 import { RiVoiceprintFill } from "react-icons/ri";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -23,6 +26,7 @@ const voiceSamples: VoiceSample[] = [
 const SampleMp3Voices: React.FC = () => {
   const [currentSample, setCurrentSample] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const btnRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -30,17 +34,22 @@ const SampleMp3Voices: React.FC = () => {
     "Explore the different voices available for converting your text or PDF documents into MP3 files. Click on any voice below to hear a sample.";
 
   const playSample = (url: string) => {
-    const audio = new Audio(url);
-    if (!isPlaying) {
-      setCurrentSample(url);
-      setIsPlaying(true);
-
-      audio.play();
-      audio.addEventListener("ended", () => {
-        setCurrentSample(null);
-        setIsPlaying(false);
-      });
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
     }
+
+    const newAudio = new Audio(url);
+    setCurrentSample(url);
+    setIsPlaying(true);
+    setAudio(newAudio);
+
+    newAudio.play();
+    newAudio.addEventListener("ended", () => {
+      setCurrentSample(null);
+      setIsPlaying(false);
+      setAudio(null);
+    });
   };
 
   useGSAP(() => {
@@ -85,7 +94,7 @@ const SampleMp3Voices: React.FC = () => {
 
   return (
     <div className="lg:m-[100px] mx-10 mt-0 pt-0">
-      <h2 ref={textRef} className="lg:text-2xl font-bold mb-10 ">
+      <h2 ref={textRef} className="lg:text-2xl font-bold mb-10 text-gray-500">
         {textDescription.split(" ").map((word, i) => (
           <span key={i} className="inline-block mr-2">
             {word}
