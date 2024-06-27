@@ -1,4 +1,5 @@
 "use client";
+import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
 import GenerateSpeechUi from "./components/GenerateSpeechUi";
 import Header from "./components/Hader";
@@ -12,6 +13,7 @@ const Home = () => {
       <Hero />
       <SampleMp3Voices />
       <GenerateSpeechUi />
+      <FAQ />
       <Footer />
     </div>
   );
