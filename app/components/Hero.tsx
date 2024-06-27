@@ -33,8 +33,8 @@ export function Hero() {
   });
 
   return (
-    <div className="max-w-full mx-auto z-0 overflow-hidden relative h-[500px]">
-      <WavyBackground height={650} className="absolute">
+    <div className="max-w-full mx-auto overflow-hidden relative h-[500px]">
+      <WavyBackground height={650} className="absolute z-0">
         <p
           ref={heroTextRef1}
           className="text-2xl md:text-4xl lg:text-5xl font-black text-center"
