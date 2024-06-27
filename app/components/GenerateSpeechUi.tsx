@@ -128,33 +128,35 @@ const GenerateSpeechUi = () => {
           <h1 className="md:text-2xl font-bold mb-4">
             Easily transform your Text Or PDFs into MP3s.
           </h1>
-          <div className="flex flex-wrap space-x-4 mb-4">
-            <label className="flex items-center">
-              <input
-                type="radio"
-                name="inputType"
-                value="text"
-                checked={inputType === "text"}
-                onChange={() => setInputType("text")}
-                className="mr-2"
-              />
+
+          <div className="flex gap-4 mb-8">
+            <button
+              onClick={() => setInputType("text")}
+              className={`p-2 rounded ${
+                inputType === "text" ? "bg-blue-500 text-white" : "bg-gray-200"
+              }`}
+            >
               Text Input
-            </label>
-            <label className="flex items-center">
-              <input
-                type="radio"
-                name="inputType"
-                value="pdf"
-                checked={inputType === "pdf"}
-                onChange={() => setInputType("pdf")}
-                className="mr-2"
-              />
+            </button>
+            <button
+              onClick={() => setInputType("pdf")}
+              className={`p-2 rounded ${
+                inputType === "pdf" ? "bg-blue-500 text-white" : "bg-gray-200"
+              }`}
+            >
               PDF Input
-            </label>
+            </button>
           </div>
 
-          {inputType === "text" && (
-            <div className="max-w-full flex flex-col justify-between">
+          <div className="lg:flex gap-4">
+            <div
+              className={`max-w-full flex flex-col mb-8 md:mb-0 justify-between border-2 p-4 rounded-xl relative ${inputType === "pdf" ? "opacity-50 pointer-events-none" : ""}`}
+            >
+              {inputType === "pdf" && (
+                <div className="absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center z-10">
+                  Toggel Text Input
+                </div>
+              )}
               <div className="flex flex-col gap-4">
                 <p>
                   Type your text and we&apos;ll convert it into a downloadable
@@ -183,20 +185,20 @@ const GenerateSpeechUi = () => {
               </div>
               <div className="my-10">
                 {!loading ? (
-                  <p className="pb-10">
+                  <p className="">
                     🎧 Turn your PDFs and text into MP3s! 📚➡️🎶 Enjoy your
                     documents on the go by converting them into audio files.
                     Perfect for multitasking and making the most of your time!
                   </p>
                 ) : (
-                  <p className="pb-10">
+                  <p className="">
                     🔄 Converting your text into audio... 🎧 Sit back and relax,
                     we’re almost there!
                   </p>
                 )}
                 <button
                   onClick={handleGenerateFromText}
-                  className="w-full bg-blue-500 text-white my-5 p-2 rounded flex items-center justify-center"
+                  className="w-[200px] bg-blue-500 text-white my-5 p-2 rounded flex items-center justify-center"
                 >
                   {loading ? (
                     <span className="loading loading-dots loading-lg"></span>
@@ -206,10 +208,15 @@ const GenerateSpeechUi = () => {
                 </button>
               </div>
             </div>
-          )}
 
-          {inputType === "pdf" && (
-            <div className="max-w-full flex flex-col h-[500px] justify-between">
+            <div
+              className={`max-w-full flex flex-col h-[500px] justify-between border-2 p-4 rounded-xl relative ${inputType === "text" ? "opacity-50 pointer-events-none" : ""}`}
+            >
+              {inputType === "text" && (
+                <div className="absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center z-10">
+                  Toggel PDF Input
+                </div>
+              )}
               <div className="flex flex-col gap-4">
                 <p>
                   Upload your PDF document and we&apos;ll create a downloadable
@@ -251,7 +258,7 @@ const GenerateSpeechUi = () => {
                 )}
                 <button
                   onClick={handleGenerateFromPdf}
-                  className="w-full bg-blue-500 text-white my-5 p-2 rounded flex items-center justify-center"
+                  className="w-[200px] bg-blue-500 text-white my-5 p-2 rounded flex items-center justify-center"
                 >
                   {loading ? (
                     <span className="loading loading-dots loading-lg"></span>
@@ -261,7 +268,7 @@ const GenerateSpeechUi = () => {
                 </button>
               </div>
             </div>
-          )}
+          </div>
         </div>
       )}
       {showLoginPrompt && (

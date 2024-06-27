@@ -33,7 +33,7 @@ export function Hero() {
   });
 
   return (
-    <div className="max-w-full mx-auto overflow-hidden relative h-[500px]">
+    <div className="max-w-full mx-auto overflow-hidden relative h-[500px] ">
       <div className="flex flex-col justify-center items-center h-full">
         <p
           ref={heroTextRef1}

@@ -9,7 +9,7 @@ import SampleMp3Voices from "./components/VoiceSamples";
 
 const Home = () => {
   return (
-    <div className="relative">
+    <div className="relative bg-pattern">
       <Header />
       <Hero />
       <Info />
