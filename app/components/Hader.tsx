@@ -9,28 +9,8 @@ import Link from "next/link";
 import { FaBars } from "react-icons/fa";
 import Dropdown from "./Dropdown";
 
-gsap.registerPlugin(ScrollTrigger);
-
 const Header = () => {
-  const headerRef = useRef(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  useGSAP(() => {
-    gsap.fromTo(
-      headerRef.current,
-      { opacity: 0, yPercent: -50 },
-      {
-        opacity: 1,
-        yPercent: 0,
-        ease: "expo.out",
-        scrollTrigger: {
-          trigger: headerRef.current,
-          start: "top top",
-          end: "+=200",
-        },
-      }
-    );
-  });
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
