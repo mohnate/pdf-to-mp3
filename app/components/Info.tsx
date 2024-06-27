@@ -3,7 +3,7 @@ import { WobbleCard } from "./ui/wobble-card";
 
 const Info = () => {
   return (
-    <div className="m-10">
+    <div className="mb-0 pb-0 mx-10">
       <h1 className="text-gray-500 text-2xl py-4 text-center md:text-left">
         AI-Powered Text and PDF to MP3 Conversion
       </h1>

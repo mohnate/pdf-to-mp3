@@ -2,7 +2,12 @@
 import Link from "next/link";
 import { FaTimes } from "react-icons/fa";
 
-const Dropdown = ({ isOpen, toggleMenu }) => {
+interface DropdownProps {
+  isOpen: boolean;
+  toggleMenu: () => void;
+}
+
+const Dropdown = ({ isOpen, toggleMenu }: DropdownProps) => {
   return (
     <div
       className={`fixed top-0 left-0 w-full h-full bg-stone-900 text-white z-50 transition-transform duration-300 ${
