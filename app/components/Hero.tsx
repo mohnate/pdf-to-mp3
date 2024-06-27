@@ -1,7 +1,6 @@
 "use client";
 import gsap from "gsap";
 import { cn } from "../utils/cn";
-import { WavyBackground } from "./ui/wavy-background";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
