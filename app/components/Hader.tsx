@@ -37,9 +37,9 @@ const Header = () => {
   };
 
   return (
-    <div className="">
+    <div className="sticky">
       <AnnouncementBar />
-      <header ref={headerRef} className="bg-stone-200 px-8 py-4 relative z-40">
+      <header className="bg-stone-200 px-8 py-4 relative z-40">
         <div className="container mx-auto flex justify-between items-center px-4">
           <div className="flex items-center cursor-pointer hover:text-purple-500 transition duration-300">
             <Image src="/favicon.ico" alt="logo" width={32} height={32} />
