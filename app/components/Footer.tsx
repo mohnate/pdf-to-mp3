@@ -10,7 +10,7 @@ const Footer = () => {
           <Link href="/" passHref>
             <span className="flex items-center gap-4 mb-4 cursor-pointer">
               <Image
-                src="/logo.webp"
+                src="/favicon.ico"
                 alt="Home"
                 width={60}
                 height={60}
