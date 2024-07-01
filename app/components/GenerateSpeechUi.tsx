@@ -29,6 +29,7 @@ const GenerateSpeechUi = () => {
   const [loading, setLoading] = useState(false);
   const [attempts, setAttempts] = useState(0);
   const [showLoginPrompt, setShowLoginPrompt] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const generateAudio = useAction(api.generateSpeech.generateAudioAction);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,12 +53,18 @@ const GenerateSpeechUi = () => {
   };
 
   const handleGenerateFromText = async () => {
+    if (!textInput.trim()) {
+      setErrorMessage("Please enter text to convert.");
+      return;
+    }
+
     if (!isSignedIn && attempts >= 3) {
       setShowLoginPrompt(true);
       return;
     }
 
     setLoading(true);
+    setErrorMessage("");
     try {
       const buffer = await generateAudio({ input: textInput, voice });
       const blob = new Blob([buffer], { type: "audio/mpeg" });
@@ -73,17 +80,18 @@ const GenerateSpeechUi = () => {
   };
 
   const handleGenerateFromPdf = async () => {
+    if (!pdfFile) {
+      setErrorMessage("Please upload a PDF file.");
+      return;
+    }
+
     if (!isSignedIn && attempts >= 3) {
       setShowLoginPrompt(true);
       return;
     }
 
-    if (!pdfFile) {
-      alert("Please upload a PDF file.");
-      return;
-    }
-
     setLoading(true);
+    setErrorMessage("");
     try {
       const text = await extractTextFromPdf(pdfFile);
       const buffer = await generateAudio({ input: text, voice });
@@ -148,13 +156,15 @@ const GenerateSpeechUi = () => {
             </button>
           </div>
 
+          {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
+
           <div className="lg:flex gap-4">
             <div
               className={`max-w-full flex flex-col mb-8 md:mb-0 justify-between border-2 p-4 rounded-xl relative ${inputType === "pdf" ? "opacity-50 pointer-events-none" : ""}`}
             >
               {inputType === "pdf" && (
                 <div className="absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center z-10">
-                  Toggel Text Input
+                  Toggle Text Input
                 </div>
               )}
               <div className="flex flex-col gap-4">
@@ -214,7 +224,7 @@ const GenerateSpeechUi = () => {
             >
               {inputType === "text" && (
                 <div className="absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center z-10">
-                  Toggel PDF Input
+                  Toggle PDF Input
                 </div>
               )}
               <div className="flex flex-col gap-4">

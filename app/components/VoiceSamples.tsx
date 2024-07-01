@@ -163,7 +163,7 @@ const SampleMp3Voices: React.FC = () => {
       cards.forEach((card) => {
         if (card.classList.contains("playing")) {
           gsap.to(card, {
-            rotate: 2,
+            rotate: 1,
             yoyo: true,
             repeat: 9,
             duration: 0.1,
@@ -172,7 +172,7 @@ const SampleMp3Voices: React.FC = () => {
         } else {
           gsap.to(card, {
             duration: 0.5,
-            ease: "power1.inOut",
+            ease: "expo.in",
           });
         }
       });

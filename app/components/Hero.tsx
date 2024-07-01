@@ -32,13 +32,13 @@ export function Hero() {
   });
 
   return (
-    <div className="max-w-full mx-auto overflow-hidden relative h-[500px] ">
+    <div className="max-w-full mx-auto overflow-hidden relative h-[500px]">
       <div className="flex flex-col justify-center items-center h-full">
         <p
           ref={heroTextRef1}
-          className="text-2xl md:text-4xl lg:text-5xl font-black text-center"
+          className="text-2xl text-balance md:text-4xl lg:text-8xl font-black text-center"
         >
-          Convert PDF or Text to MP3 And Download it online For Free!
+          Conversational Voice AI Bots
         </p>
         <p
           ref={heroTextRef2}
