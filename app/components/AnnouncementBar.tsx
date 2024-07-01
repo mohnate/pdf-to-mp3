@@ -8,12 +8,12 @@ const AnnouncementBar = () => {
   return (
     <div className="bg-gray-800 text-white py-2 px-4">
       <div className="container mx-auto flex justify-between items-center">
-        <button className="font-bold hover:text-purple-300 transition duration-300">
+        <button className="font-bold hover:text-[#3fcfa4] transition duration-300">
           Support
         </button>
         <div className="flex space-x-4 items-center">
           <Unauthenticated>
-            <div className="bg-purple-500 text-white py-2 px-4 rounded-md hover:bg-purple-600 transition duration-300">
+            <div className="bg-[#3fcfa4] text-white py-2 px-4 rounded-md hover:bg-[#0e4937] transition duration-300">
               <SignInButton mode="modal" />
             </div>
           </Unauthenticated>

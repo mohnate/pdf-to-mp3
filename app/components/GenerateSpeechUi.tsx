@@ -132,16 +132,16 @@ const GenerateSpeechUi = () => {
           <div className="flex gap-4 mb-8">
             <button
               onClick={() => setInputType("text")}
-              className={`p-2 rounded ${
-                inputType === "text" ? "bg-blue-500 text-white" : "bg-gray-200"
+              className={`py-2 px-4 rounded-full font-semibold ${
+                inputType === "text" ? "bg-[#3fcfa4] text-white" : "bg-gray-200"
               }`}
             >
               Text Input
             </button>
             <button
               onClick={() => setInputType("pdf")}
-              className={`p-2 rounded ${
-                inputType === "pdf" ? "bg-blue-500 text-white" : "bg-gray-200"
+              className={`py-2 px-4 rounded-full font-semibold ${
+                inputType === "pdf" ? "bg-[#3fcfa4] text-white" : "bg-gray-200"
               }`}
             >
               PDF Input
@@ -198,7 +198,7 @@ const GenerateSpeechUi = () => {
                 )}
                 <button
                   onClick={handleGenerateFromText}
-                  className="w-[200px] bg-blue-500 text-white my-5 p-2 rounded flex items-center justify-center"
+                  className="w-[200px] bg-[#f6e067] rounded-full text-white my-5 px-4 py-2 text-xl font-bold flex items-center justify-center"
                 >
                   {loading ? (
                     <span className="loading loading-dots loading-lg"></span>
@@ -258,7 +258,7 @@ const GenerateSpeechUi = () => {
                 )}
                 <button
                   onClick={handleGenerateFromPdf}
-                  className="w-[200px] bg-blue-500 text-white my-5 p-2 rounded flex items-center justify-center"
+                  className="w-[200px] bg-[#f6e067] rounded-full text-white my-5 py-2 px-4 text-xl font-bold flex items-center justify-center"
                 >
                   {loading ? (
                     <span className="loading loading-dots loading-lg"></span>

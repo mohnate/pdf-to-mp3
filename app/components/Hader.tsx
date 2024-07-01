@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -8,6 +8,18 @@ import AnnouncementBar from "./AnnouncementBar";
 import Link from "next/link";
 import { FaBars } from "react-icons/fa";
 import Dropdown from "./Dropdown";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from "@/components/ui/navigation-menu";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,47 +32,121 @@ const Header = () => {
     <div className="">
       <AnnouncementBar />
       <header className="bg-stone-200 px-8 py-4 relative z-40">
-        <div className="container mx-auto flex justify-between items-center px-4">
-          <div className="flex items-center cursor-pointer hover:text-purple-500 transition duration-300">
+        <div className="container flex flex-row justify-between items-center px-4">
+          <div className="flex items-center cursor-pointer hover:text-[#3fcfa4] transition duration-300">
             <Image src="/favicon.ico" alt="logo" width={32} height={32} />
-            <h1 className="text-xl md:text-2xl font-bold ml-2">
+            <h1 className="md:block hidden text-xl md:text-2xl font-bold ml-2">
               PDF to MP3 Generator
             </h1>
           </div>
-          <nav className="hidden md:flex space-x-4 items-center">
-            <Link href="/" passHref>
-              <div className="font-bold transition-transform duration-300 hover:scale-110 hover:text-purple-500 cursor-pointer">
-                Home
-              </div>
-            </Link>
-            <Link href="/about" passHref>
-              <div className="font-bold transition-transform duration-300 hover:scale-110 hover:text-purple-500 cursor-pointer">
-                About
-              </div>
-            </Link>
-            <Link href="/features" passHref>
-              <div className="font-bold transition-transform duration-300 hover:scale-110 hover:text-purple-500 cursor-pointer">
-                Features
-              </div>
-            </Link>
-            <Link href="/contact" passHref>
-              <div className="font-bold transition-transform duration-300 hover:scale-110 hover:text-purple-500 cursor-pointer">
-                Contact
-              </div>
-            </Link>
-          </nav>
-          <button
-            className="block md:hidden text-xl text-gray-700 z-50"
-            onClick={toggleMenu}
-            aria-label="Menu"
-          >
-            <FaBars />
-          </button>
+          <NavigationMenu className="md:mr-[100px]">
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="font-bold transition-transform duration-300 hover:scale-110 hover:text-[#3fcfa4] cursor-pointer">
+                  Menu
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid p-2 gap-3 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                    <li className="row-span-3">
+                      <NavigationMenuLink asChild>
+                        <a
+                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                          href="/"
+                        >
+                          <Image
+                            src="/favicon.ico"
+                            alt="logo"
+                            width={24}
+                            height={24}
+                          />
+                          <div className="mb-2 mt-4 text-lg font-medium">
+                            PDF to MP3 Generator
+                          </div>
+                          <p className="text-sm leading-tight text-muted-foreground">
+                            Convert your text or PDF documents into MP3 files
+                            quickly and easily.
+                          </p>
+                        </a>
+                      </NavigationMenuLink>
+                    </li>
+                    <ListItem href="/docs" title="Introduction">
+                      Learn more about how our app works and its features.
+                    </ListItem>
+                    <ListItem href="/features" title="Features">
+                      Discover the various features available in our app.
+                    </ListItem>
+                    <ListItem href="/contact" title="Contact">
+                      Get in touch with us for any inquiries or support.
+                    </ListItem>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="font-bold transition-transform duration-300 hover:scale-110 hover:text-[#3fcfa4] cursor-pointer">
+                  Components
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid lg:w-[500px] w-[350px] gap-3 p-4 md:grid-cols-2 ">
+                    <ListItem href="/convert" title="Convert">
+                      Convert text input or PDF documents to MP3 files.
+                    </ListItem>
+                    <ListItem href="/download" title="Download">
+                      Access and download your converted MP3 files.
+                    </ListItem>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="font-bold transition-transform duration-300 hover:scale-110 hover:text-[#3fcfa4] cursor-pointer">
+                  Links
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid lg:w-[500px] w-[350px] gap-3 p-4 md:grid-cols-2 ">
+                    <ListItem href="/" title="Home">
+                      Home
+                    </ListItem>
+                    <ListItem href="/about" title="Download">
+                      About
+                    </ListItem>
+                    <ListItem href="/features" title="Featured Items.">
+                      Features
+                    </ListItem>
+                    <ListItem href="/contact" title="Contact Page">
+                      Contact
+                    </ListItem>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
         </div>
       </header>
       <Dropdown isOpen={isMenuOpen} toggleMenu={toggleMenu} />
     </div>
   );
 };
+
+const ListItem = React.forwardRef<
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a">
+>(({ className, title, children, ...props }, ref) => {
+  return (
+    <li>
+      <NavigationMenuLink asChild>
+        <a
+          ref={ref}
+          className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${className}`}
+          {...props}
+        >
+          <div className="text-sm font-medium leading-none">{title}</div>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+            {children}
+          </p>
+        </a>
+      </NavigationMenuLink>
+    </li>
+  );
+});
+ListItem.displayName = "ListItem";
 
 export default Header;

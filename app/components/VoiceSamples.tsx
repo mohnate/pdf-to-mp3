@@ -192,26 +192,31 @@ const SampleMp3Voices: React.FC = () => {
         {voiceSamples.map((sample, index) => (
           <li
             key={sample.name}
-            className={`flex flex-col li bg-slate-100 rounded-xl shadow-2xl p-4 ${currentPlaying === sample.name ? "playing" : ""}`}
+            className={`flex flex-col li bg-[#eaeaea] rounded-full shadow-2xl p-4 ${currentPlaying === sample.name ? "playing" : ""}`}
           >
             <div className="flex items-center gap-4">
               <button
                 ref={(el) => {
                   if (el) buttonRefs.current[index] = el;
                 }}
-                className="playBtn"
+                className="playBtn bg-[#3fcfa4] rounded-full p-4"
                 onClick={() => playSample(sample.url, sample.name)}
               >
-                <FaPlay size={30} />
+                <FaPlay size={20} />
               </button>
               <div className="text-gray-500">
                 <h3 className="font-semibold">{sample.name}</h3>
-                <p className="text-xs">
-                  {sample.gender} • {sample.nationality}
+                <p className="text-xs py-2">
+                  <span className="bg-[#f4d1d1] rounded-full py-1 px-2 mr-2">
+                    {sample.gender}
+                  </span>
+
+                  <span className="bg-[#fff2cc] rounded-full px-2 p-1">
+                    {sample.nationality}
+                  </span>
                 </p>
               </div>
             </div>
-            <p className="text-sm pt-2">{sample.description}</p>
           </li>
         ))}
       </ul>
