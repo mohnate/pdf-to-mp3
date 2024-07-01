@@ -17,7 +17,7 @@ const Header = () => {
   };
 
   return (
-    <div className="sticky">
+    <div className="">
       <AnnouncementBar />
       <header className="bg-stone-200 px-8 py-4 relative z-40">
         <div className="container mx-auto flex justify-between items-center px-4">

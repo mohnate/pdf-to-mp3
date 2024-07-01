@@ -10,7 +10,7 @@ interface DropdownProps {
 const Dropdown = ({ isOpen, toggleMenu }: DropdownProps) => {
   return (
     <div
-      className={`fixed top-0 left-0 w-full h-full bg-stone-900 text-white transition-transform duration-300 ${
+      className={`fixed top-0 left-0 w-full h-full bg-stone-900 text-white transition-transform duration-800 ${
         isOpen ? "translate-x-0" : "translate-x-full"
       }`}
       style={{ zIndex: 1000 }}
