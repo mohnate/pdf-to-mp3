@@ -2,7 +2,7 @@ import Image from "next/image";
 import { WobbleCard } from "./ui/wobble-card";
 import { RiUserVoiceFill } from "react-icons/ri";
 import { FaDownload, FaFilePdf } from "react-icons/fa";
-import { BsChatTextFill } from "react-icons/bs";
+import { IoLanguageSharp } from "react-icons/io5";
 
 const Info = () => {
   return (
@@ -12,13 +12,13 @@ const Info = () => {
       </h1>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-7xl mx-auto w-full">
         <WobbleCard
-          containerClassName="col-span-1 lg:col-span-2  bg-pink-800 min-h-[300px]"
+          containerClassName="col-span-1 lg:col-span-2  bg-pink-800 min-h-[300px] "
           className="relative flex flex-col"
         >
-          <div className="max-w-xs">
-            <div className="flex items-center space-x-2">
+          <div className="max-w-xs md:min-w-full">
+            <div className="flex items-center space-x-4">
               <RiUserVoiceFill size={80} color="white" />
-              <h2 className="text-left w-full md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+              <h2 className="text-left w-full text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
                 Choose from 6 AI Voices
               </h2>
             </div>
@@ -32,10 +32,10 @@ const Info = () => {
           containerClassName="col-span-1 min-h-[300px] bg-gray-800"
           className="relative p-4"
         >
-          <div className="max-w-xs">
+          <div className="max-w-xs md:min-w-full">
             <div className="flex items-center space-x-2">
               <FaDownload size={80} color="white" />
-              <h2 className="text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+              <h2 className="text-left text-balance text-xl lg:text-2xl font-semibold tracking-[-0.015em] text-white">
                 Download MP3 File
               </h2>
             </div>
@@ -49,10 +49,10 @@ const Info = () => {
           containerClassName="col-span-1 min-h-[300px] bg-gray-800"
           className="relative p-4"
         >
-          <div className="max-w-xs">
+          <div className="max-w-xs md:min-w-full">
             <div className="flex items-center space-x-2">
               <FaFilePdf size={80} color="white" />
-              <h2 className="text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+              <h2 className="text-left text-balance text-xl lg:text-2xl font-semibold tracking-[-0.015em] text-white">
                 PDF Files to Speech
               </h2>
             </div>
@@ -66,17 +66,18 @@ const Info = () => {
           containerClassName="col-span-1 lg:col-span-2 bg-blue-900 min-h-[300px]"
           className="relative p-4"
         >
-          <div className="max-w-xs">
+          <div className="max-w-xs md:min-w-full">
             <div className="flex items-center space-x-2">
-              <BsChatTextFill size={80} color="white" />
+              <IoLanguageSharp size={80} color="white" />
 
-              <h2 className="text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
-                Text to Speech Using AI
+              <h2 className="text-left text-balance text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+                In Any Language!
               </h2>
             </div>
-            <p className="mt-4 text-left text-base/6 text-neutral-200">
-              Convert any text input to speech using advanced AI technology,
-              enhancing accessibility and convenience.
+            <p className="mt-4 text-left text-neutral-200">
+              Effortlessly Translate and Convert Text or PDF to Speech in Any
+              Language Seamlessly transform your text or PDF documents into
+              spoken words in your preferred language.
             </p>
           </div>
         </WobbleCard>

@@ -22,14 +22,17 @@ const GenerateSpeechUi = () => {
   const { isSignedIn } = useUser();
   const [inputType, setInputType] = useState<"text" | "pdf">("text");
   const [pdfFile, setPdfFile] = useState<File | null>(null);
-  const [voice, setVoice] = useState("alloy");
-  const [audioUrl, setAudioUrl] = useState<string | null>(null);
+  const [txtVoice, setTxtVoice] = useState("");
+  const [pdfVoice, setPdfVoice] = useState("");
+  const [audioUrl, setAudioUrl] = useState<string | null>(true);
   const [textInput, setTextInput] = useState("");
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
   const [loading, setLoading] = useState(false);
   const [attempts, setAttempts] = useState(0);
   const [showLoginPrompt, setShowLoginPrompt] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [txtErrorMessage, setTxtErrorMessage] = useState("");
+  const [pdfErrorMessage, setPdfErrorMessage] = useState("");
+
   const generateAudio = useAction(api.generateSpeech.generateAudioAction);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,19 +57,24 @@ const GenerateSpeechUi = () => {
 
   const handleGenerateFromText = async () => {
     if (!textInput.trim()) {
-      setErrorMessage("Please enter text to convert.");
+      setTxtErrorMessage("Please enter text to convert.");
       return;
     }
 
-    if (!isSignedIn && attempts >= 3) {
+    if (!txtVoice) {
+      setTxtErrorMessage("Please choose a voice to narrate your text.");
+      return;
+    }
+
+    if (!isSignedIn && attempts >= 5) {
       setShowLoginPrompt(true);
       return;
     }
 
     setLoading(true);
-    setErrorMessage("");
+    setTxtErrorMessage("");
     try {
-      const buffer = await generateAudio({ input: textInput, voice });
+      const buffer = await generateAudio({ input: textInput, voice: txtVoice });
       const blob = new Blob([buffer], { type: "audio/mpeg" });
       const url = URL.createObjectURL(blob);
       setAudioUrl(url);
@@ -81,20 +89,25 @@ const GenerateSpeechUi = () => {
 
   const handleGenerateFromPdf = async () => {
     if (!pdfFile) {
-      setErrorMessage("Please upload a PDF file.");
+      setPdfErrorMessage("Please upload a PDF file.");
       return;
     }
 
-    if (!isSignedIn && attempts >= 3) {
+    if (!pdfVoice) {
+      setPdfErrorMessage("Please choose a voice to narrate your PDF file.");
+      return;
+    }
+
+    if (!isSignedIn && attempts >= 5) {
       setShowLoginPrompt(true);
       return;
     }
 
     setLoading(true);
-    setErrorMessage("");
+    setPdfErrorMessage("");
     try {
       const text = await extractTextFromPdf(pdfFile);
-      const buffer = await generateAudio({ input: text, voice });
+      const buffer = await generateAudio({ input: text, voice: pdfVoice });
       const blob = new Blob([buffer], { type: "audio/mpeg" });
       const url = URL.createObjectURL(blob);
       setAudioUrl(url);
@@ -156,8 +169,6 @@ const GenerateSpeechUi = () => {
             </button>
           </div>
 
-          {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
-
           <div className="lg:flex gap-4">
             <div
               className={`max-w-full flex flex-col mb-8 md:mb-0 justify-between border-2 p-4 rounded-xl relative ${inputType === "pdf" ? "opacity-50 pointer-events-none" : ""}`}
@@ -172,7 +183,7 @@ const GenerateSpeechUi = () => {
                   Type your text and we&apos;ll convert it into a downloadable
                   MP3!{" "}
                 </p>
-                <Select onValueChange={(value) => setVoice(value)}>
+                <Select onValueChange={(value) => setTxtVoice(value)}>
                   <SelectTrigger className="w-full p-2 border rounded mb-2">
                     <SelectValue placeholder="Select a voice to narrate your text." />
                   </SelectTrigger>
@@ -186,7 +197,7 @@ const GenerateSpeechUi = () => {
                   </SelectContent>
                 </Select>
                 <Textarea
-                  className="w-full p-2 border rounded mb-2"
+                  className="w-full p-2 border rounded"
                   value={textInput}
                   name="text-input"
                   onChange={(e) => setTextInput(e.target.value)}
@@ -194,8 +205,31 @@ const GenerateSpeechUi = () => {
                 />
               </div>
               <div className="my-10">
+                {txtErrorMessage && (
+                  <div
+                    role="alert"
+                    className="alert alert-error flex items-center justify-center"
+                  >
+                    <button onClick={() => setTxtErrorMessage("")}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 shrink-0 stroke-current"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </button>
+                    <span className="text-sm">{txtErrorMessage}</span>
+                  </div>
+                )}
                 {!loading ? (
-                  <p className="">
+                  <p className="pt-2 lg:pt-6">
                     🎧 Turn your PDFs and text into MP3s! 📚➡️🎶 Enjoy your
                     documents on the go by converting them into audio files.
                     Perfect for multitasking and making the most of your time!
@@ -233,7 +267,7 @@ const GenerateSpeechUi = () => {
                   MP3 for you!{" "}
                 </p>
 
-                <Select onValueChange={(value) => setVoice(value)}>
+                <Select onValueChange={(value) => setPdfVoice(value)}>
                   <SelectTrigger className="w-full p-2 border rounded mb-2">
                     <SelectValue placeholder="Select a voice to narrate your PDF file." />
                   </SelectTrigger>
@@ -253,9 +287,33 @@ const GenerateSpeechUi = () => {
                   className="file-input file-input-bordered file-input-info w-full max-w-xs text-white"
                 />
               </div>
-              <div className="my-10">
+              <div className="my-10 flex flex-col">
+                {pdfErrorMessage && (
+                  <div
+                    role="alert"
+                    className="alert alert-error flex items-center justify-center"
+                  >
+                    <button onClick={() => setPdfErrorMessage("")}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 shrink-0 stroke-current"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </button>
+                    <span className="text-sm">{pdfErrorMessage}</span>
+                  </div>
+                )}
+
                 {!loading ? (
-                  <p className="">
+                  <p className="pt-2 lg:pt-6">
                     🎧 Turn your PDFs and text into MP3s! 📚➡️🎶 Enjoy your
                     documents on the go by converting them into audio files.
                     Perfect for multitasking and making the most of your time!

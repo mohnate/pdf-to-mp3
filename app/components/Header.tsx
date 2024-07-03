@@ -23,15 +23,30 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const headerRef = useRef(null);
+
+  useGSAP(() => {
+    gsap.to(headerRef.current, {
+      opacity: 0,
+      y: -100,
+      ease: "power1",
+      scrollTrigger: {
+        trigger: headerRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+  });
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <div className="">
+    <div>
       <AnnouncementBar />
-      <header className="bg-stone-200 px-8 py-4 relative z-40">
+      <header ref={headerRef} className="bg-stone-200 px-8 py-4 relative z-40">
         <div className="container flex flex-row justify-between items-center px-4">
           <div className="flex items-center cursor-pointer hover:text-[#3fcfa4] transition duration-300">
             <Image src="/favicon.ico" alt="logo" width={32} height={32} />
