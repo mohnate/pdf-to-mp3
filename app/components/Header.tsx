@@ -44,7 +44,7 @@ const Header = () => {
   };
 
   return (
-    <div>
+    <div className="">
       <AnnouncementBar />
       <header ref={headerRef} className="bg-stone-200 px-8 py-4 relative z-40">
         <div className="container flex flex-row justify-between items-center px-4">
@@ -54,14 +54,14 @@ const Header = () => {
               PDF to MP3 Generator
             </h1>
           </div>
-          <NavigationMenu className="md:mr-[100px]">
+          <NavigationMenu className="md:mr-[100px] z-50">
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="font-bold transition-transform duration-300 hover:scale-110 hover:text-[#3fcfa4] cursor-pointer">
                   Menu
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid p-2 gap-3 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                  <ul className="grid p-2 gap-3 md:w-[450px] lg:grid-cols-[.75fr_1fr]">
                     <li className="row-span-3">
                       <NavigationMenuLink asChild>
                         <a
@@ -71,8 +71,8 @@ const Header = () => {
                           <Image
                             src="/favicon.ico"
                             alt="logo"
-                            width={24}
-                            height={24}
+                            width={54}
+                            height={54}
                           />
                           <div className="mb-2 mt-4 text-lg font-medium">
                             PDF to MP3 Generator
@@ -101,7 +101,7 @@ const Header = () => {
                   Components
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid lg:w-[500px] w-[350px] gap-3 p-4 md:grid-cols-2 ">
+                  <ul className="grid lg:w-[450px] w-[350px] gap-3 p-4 md:grid-cols-2 ">
                     <ListItem href="/convert" title="Convert">
                       Convert text input or PDF documents to MP3 files.
                     </ListItem>
@@ -116,7 +116,7 @@ const Header = () => {
                   Links
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid lg:w-[500px] w-[350px] gap-3 p-4 md:grid-cols-2 ">
+                  <ul className="grid lg:w-[450px] w-[350px] gap-3 p-4 md:grid-cols-2 ">
                     <ListItem href="/" title="Home">
                       Home
                     </ListItem>
@@ -136,7 +136,6 @@ const Header = () => {
           </NavigationMenu>
         </div>
       </header>
-      <Dropdown isOpen={isMenuOpen} toggleMenu={toggleMenu} />
     </div>
   );
 };

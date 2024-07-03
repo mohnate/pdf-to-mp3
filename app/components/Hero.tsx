@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import React, { FC, useRef } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import Image from "next/image";
+import Header from "./Header";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -48,6 +49,12 @@ export const Hero: FC<HeroPrrops> = ({ generateSpeechRef }) => {
         scrub: true,
       },
     });
+
+    gsap.from(imgRef.current, {
+      scale: 1.3,
+      duration: 4,
+      ease: "expo",
+    });
   });
 
   const handleScroll = () => {
@@ -57,10 +64,11 @@ export const Hero: FC<HeroPrrops> = ({ generateSpeechRef }) => {
   return (
     <div
       ref={containerRef}
-      className="max-w-full mx-auto overflow-hidden relative h-[500px] bg-blurry rounded-b-3xl shadow-2xl"
+      className="max-w-full overflow-hidden relative bg-blurry rounded-b-3xl shadow-2xl"
     >
+      <Header />
       <div className="flex flex-col lg:flex-row">
-        <div className="flex flex-col z-50 rela flex-1 justify-center h-full lg:w-1/2 p-8 pb-0">
+        <div className="flex flex-col z-30 rela flex-1 justify-center h-full lg:w-1/2 p-8 pb-0">
           <p
             ref={heroTextRef1}
             className="text-2xl text-balance md:text-4xl lg:text-8xl font-thin"

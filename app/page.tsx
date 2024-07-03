@@ -13,7 +13,7 @@ const Home = () => {
 
   return (
     <div className="relative bg-pattern">
-      <Header />
+      {/* <Header /> */}
       <Hero generateSpeechRef={generateSpeechRef} />
       <Info />
       <SampleMp3Voices />
