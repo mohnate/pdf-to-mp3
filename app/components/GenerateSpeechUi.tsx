@@ -137,7 +137,7 @@ const GenerateSpeechUi = () => {
   };
 
   return (
-    <div className="flex flex-col items-center lg:m-[100px] bg-slate-100 text-gray-500 rounded-lg m-10 p-8">
+    <div className="flex flex-col items-center lg:m-[100px] bg-slate-100 text-gray-500 rounded-3xl m-10">
       {audioUrl ? (
         <DownloadAudio
           audioUrl={audioUrl}
@@ -145,7 +145,7 @@ const GenerateSpeechUi = () => {
           onDownload={handleDownload}
         />
       ) : (
-        <div className="flex flex-col justify-between">
+        <div className="flex flex-col justify-between p-8">
           <h1 className="md:text-2xl font-bold mb-4">
             Easily transform your Text Or PDFs into MP3s.
           </h1>
