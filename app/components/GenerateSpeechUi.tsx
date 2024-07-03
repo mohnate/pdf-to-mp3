@@ -24,7 +24,7 @@ const GenerateSpeechUi = () => {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [txtVoice, setTxtVoice] = useState("");
   const [pdfVoice, setPdfVoice] = useState("");
-  const [audioUrl, setAudioUrl] = useState<string | null>(true);
+  const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [textInput, setTextInput] = useState("");
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
   const [loading, setLoading] = useState(false);
