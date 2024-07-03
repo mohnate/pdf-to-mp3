@@ -242,7 +242,7 @@ const GenerateSpeechUi = () => {
                 )}
                 <button
                   onClick={handleGenerateFromText}
-                  className="w-[200px] bg-[#f6e067] rounded-full text-white my-5 px-4 py-2 text-xl font-bold flex items-center justify-center"
+                  className="w-[200px] bg-[#f6e067] rounded-full text-black my-5 px-4 py-2 text-xl font-thin flex items-center justify-center"
                 >
                   {loading ? (
                     <span className="loading loading-dots loading-lg"></span>
@@ -326,7 +326,7 @@ const GenerateSpeechUi = () => {
                 )}
                 <button
                   onClick={handleGenerateFromPdf}
-                  className="w-[200px] bg-[#f6e067] rounded-full text-white my-5 py-2 px-4 text-xl font-bold flex items-center justify-center"
+                  className="w-[200px] bg-[#f6e067] rounded-full text-black my-5 py-2 px-4 text-xl font-thin flex items-center justify-center"
                 >
                   {loading ? (
                     <span className="loading loading-dots loading-lg"></span>

@@ -82,11 +82,11 @@ const DownloadAudio: React.FC<DownloadAudioProps> = ({
 
   return (
     <div className="h-[600px] w-full relative flex flex-col lg:flex-row bg-white rounded-3xl shadow-lg overflow-hidden">
-      <div className="lg:w-2/5 p-8 flex flex-col justify-center gap-8">
-        <h2 className="text-3xl font-bold text-gray-800">
+      <div className="lg:w-2/5 p-8 flex flex-col justify-between">
+        <h2 className="lg:text-3xl text-xl font-bold text-gray-800">
           🎉 Your Audio is Ready!
         </h2>
-        <p className="text-gray-600">
+        <p className="text-gray-600 text-sm py-4">
           🎉 Your audio file is now ready! With just a few clicks, you’ve
           transformed your text or PDF into a high-quality MP3. Download your
           file to enjoy your content anytime, anywhere. Thank you for using our
@@ -96,31 +96,31 @@ const DownloadAudio: React.FC<DownloadAudioProps> = ({
           <div className="flex items-center justify-between">
             <button
               onClick={() => skipTime(-10)}
-              className="bg-gray-500 text-white p-3 rounded-lg flex items-center justify-center hover:bg-gray-600 transition"
+              className="bg-gray-500 text-white p-2 rounded-lg flex items-center justify-center hover:bg-gray-600 transition"
             >
               <FaFastBackward />
             </button>
             <button
               onClick={() => skipTime(-5)}
-              className="bg-gray-500 text-white p-3 rounded-lg flex items-center justify-center hover:bg-gray-600 transition"
+              className="bg-gray-500 text-white p-2 rounded-lg flex items-center justify-center hover:bg-gray-600 transition"
             >
               <FaBackward />
             </button>
             <button
               onClick={togglePlayPause}
-              className="bg-blue-500 text-white p-3 rounded-lg flex items-center justify-center hover:bg-blue-600 transition"
+              className="bg-blue-500 text-white p-2 rounded-lg flex items-center justify-center hover:bg-blue-600 transition"
             >
               {isPlaying ? <FaPause /> : <FaPlay />}
             </button>
             <button
               onClick={() => skipTime(5)}
-              className="bg-gray-500 text-white p-3 rounded-lg flex items-center justify-center hover:bg-gray-600 transition"
+              className="bg-gray-500 text-white p-2 rounded-lg flex items-center justify-center hover:bg-gray-600 transition"
             >
               <FaForward />
             </button>
             <button
               onClick={() => skipTime(10)}
-              className="bg-gray-500 text-white p-3 rounded-lg flex items-center justify-center hover:bg-gray-600 transition"
+              className="bg-gray-500 text-white p-2 rounded-lg flex items-center justify-center hover:bg-gray-600 transition"
             >
               <FaFastForward />
             </button>
@@ -138,53 +138,55 @@ const DownloadAudio: React.FC<DownloadAudioProps> = ({
           <div className="flex items-center justify-center gap-4 mt-4">
             <button
               onClick={() => changePlaybackRate(0.5)}
-              className={`p-3 rounded-lg flex items-center justify-center transition ${playbackRate === 0.5 ? "bg-blue-500 text-white" : "bg-gray-500 text-white hover:bg-gray-600"}`}
+              className={`p-2 rounded-lg flex items-center justify-center transition ${playbackRate === 0.5 ? "bg-blue-500 text-white" : "bg-gray-500 text-white hover:bg-gray-600"}`}
             >
               0.5x
             </button>
             <button
               onClick={() => changePlaybackRate(1)}
-              className={`p-3 rounded-lg flex items-center justify-center transition ${playbackRate === 1 ? "bg-blue-500 text-white" : "bg-gray-500 text-white hover:bg-gray-600"}`}
+              className={`p-2 rounded-lg flex items-center justify-center transition ${playbackRate === 1 ? "bg-blue-500 text-white" : "bg-gray-500 text-white hover:bg-gray-600"}`}
             >
               1x
             </button>
             <button
               onClick={() => changePlaybackRate(1.5)}
-              className={`p-3 rounded-lg flex items-center justify-center transition ${playbackRate === 1.5 ? "bg-blue-500 text-white" : "bg-gray-500 text-white hover:bg-gray-600"}`}
+              className={`p-2 rounded-lg flex items-center justify-center transition ${playbackRate === 1.5 ? "bg-blue-500 text-white" : "bg-gray-500 text-white hover:bg-gray-600"}`}
             >
               1.5x
             </button>
             <button
               onClick={() => changePlaybackRate(2)}
-              className={`p-3 rounded-lg flex items-center justify-center transition ${playbackRate === 2 ? "bg-blue-500 text-white" : "bg-gray-500 text-white hover:bg-gray-600"}`}
+              className={`p-2 rounded-lg flex items-center justify-center transition ${playbackRate === 2 ? "bg-blue-500 text-white" : "bg-gray-500 text-white hover:bg-gray-600"}`}
             >
               2x
             </button>
           </div>
           <audio ref={audioRef} src={audioUrl} className="hidden" />
-          <button
-            onClick={onDownload}
-            className="w-full bg-blue-500 text-white p-4 rounded-lg flex items-center justify-center gap-2 hover:bg-blue-600 transition transform hover:scale-105"
-          >
-            <FaDownload />
-            Download Audio
-          </button>
-          <button
-            onClick={onBack}
-            className="w-full bg-gray-500 text-white p-4 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-600 transition transform hover:scale-105"
-          >
-            <FaArrowLeft />
-            Back
-          </button>
+          <div className="">
+            <button
+              onClick={onDownload}
+              className="w-full my-5 bg-[#f6e067] gap-2 rounded-full text-black px-4 py-2 text-xl font-thin flex items-center justify-center"
+            >
+              <FaDownload />
+              Download Audio
+            </button>
+            <button
+              onClick={onBack}
+              className="w-full bg-gray-500 text-white px-4 py-2 rounded-full flex items-center justify-center gap-2 hover:bg-gray-600 transition transform"
+            >
+              <FaArrowLeft />
+              Back
+            </button>
+          </div>
         </div>
       </div>
-      <div className="lg:w-3/5 h-full relative">
+      <div className="flex-1 lg:w-1/2 relative">
         <Image
-          src="/hero-bg.avif"
+          src="/bg-download.jpg"
           alt="banner"
           layout="fill"
           objectFit="cover"
-          className="rounded-r-3xl"
+          className="lg:rounded-r-3xl absolute"
         />
       </div>
     </div>

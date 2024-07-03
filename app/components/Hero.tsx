@@ -15,6 +15,8 @@ interface HeroPrrops {
 export const Hero: FC<HeroPrrops> = ({ generateSpeechRef }) => {
   const heroTextRef1 = useRef(null);
   const heroTextRef2 = useRef(null);
+  const imgRef = useRef(null);
+  const containerRef = useRef(null);
 
   useGSAP(() => {
     gsap.fromTo(
@@ -34,6 +36,18 @@ export const Hero: FC<HeroPrrops> = ({ generateSpeechRef }) => {
         },
       }
     );
+
+    // 3d image animation
+    gsap.to(imgRef.current, {
+      scale: 1.3,
+      rotate: 0.2,
+      ease: "power1",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top top",
+        scrub: true,
+      },
+    });
   });
 
   const handleScroll = () => {
@@ -41,9 +55,12 @@ export const Hero: FC<HeroPrrops> = ({ generateSpeechRef }) => {
   };
 
   return (
-    <div className="max-w-full mx-auto overflow-hidden relative h-[500px] bg-blurry rounded-b-3xl shadow-2xl">
+    <div
+      ref={containerRef}
+      className="max-w-full mx-auto overflow-hidden relative h-[500px] bg-blurry rounded-b-3xl shadow-2xl"
+    >
       <div className="flex flex-col lg:flex-row">
-        <div className="flex flex-col flex-1 justify-center h-full lg:w-1/2 p-8 pb-0">
+        <div className="flex flex-col z-50 rela flex-1 justify-center h-full lg:w-1/2 p-8 pb-0">
           <p
             ref={heroTextRef1}
             className="text-2xl text-balance md:text-4xl lg:text-8xl font-thin"
@@ -71,12 +88,12 @@ export const Hero: FC<HeroPrrops> = ({ generateSpeechRef }) => {
         </div>
 
         <Image
-          src="/hero-bg.avif"
+          ref={imgRef}
+          src="/3d-bg.png"
           alt="banner"
-          objectFit="cover"
           width={500}
           height={500}
-          className="rounded-b-3xl lg:rounded-none w-full"
+          className="rounded-b-3xl lg:rounded-none lg:relative absolute -right-32 lg:right-0"
         />
       </div>
     </div>
