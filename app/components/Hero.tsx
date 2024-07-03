@@ -37,8 +37,7 @@ export const Hero: FC<HeroPrrops> = ({ generateSpeechRef }) => {
   });
 
   const handleScroll = () => {
-    generateSpeechRef.current.scrollIntoView({ behavior: "smooth" });
-    console.log(generateSpeechRef, "clicked");
+    generateSpeechRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
