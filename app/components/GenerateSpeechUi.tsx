@@ -267,16 +267,6 @@ const GenerateSpeechUi = () => {
                     we’re almost there!
                   </p>
                 )}
-                <button
-                  onClick={handleGenerateFromText}
-                  className="w-[200px] bg-[#f6e067] rounded-full text-black my-5 px-4 py-2 text-xl font-thin flex items-center justify-center"
-                >
-                  {loading ? (
-                    <span className="loading loading-dots loading-lg"></span>
-                  ) : (
-                    "Generate Audio"
-                  )}
-                </button>
               </div>
             </div>
 
@@ -351,19 +341,24 @@ const GenerateSpeechUi = () => {
                     we’re almost there!
                   </p>
                 )}
-                <button
-                  onClick={handleGenerateFromPdf}
-                  className="w-[200px] bg-[#f6e067] rounded-full text-black my-5 py-2 px-4 text-xl font-thin flex items-center justify-center"
-                >
-                  {loading ? (
-                    <span className="loading loading-dots loading-lg"></span>
-                  ) : (
-                    "Generate Audio"
-                  )}
-                </button>
               </div>
             </div>
           </div>
+
+          <button
+            onClick={() =>
+              inputType === "pdf"
+                ? handleGenerateFromPdf()
+                : handleGenerateFromText()
+            }
+            className="w-full bg-[#f6e067] rounded-full text-black my-5 py-4 text-xl font-thin flex items-center justify-center"
+          >
+            {loading ? (
+              <span className="loading loading-dots loading-lg"></span>
+            ) : (
+              "Generate Audio"
+            )}
+          </button>
         </div>
       )}
       {showLoginPrompt && (

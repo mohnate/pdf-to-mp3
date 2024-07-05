@@ -10,8 +10,6 @@ import {
   FaFastBackward,
 } from "react-icons/fa";
 import Image from "next/image";
-import { useMutation } from "convex/react";
-import { api } from "@/convex/_generated/api";
 import { useUser } from "@clerk/clerk-react"; // Import useUser from Clerk
 
 interface DownloadAudioProps {
@@ -32,7 +30,6 @@ const DownloadAudio: React.FC<DownloadAudioProps> = ({
   const [currentTime, setCurrentTime] = useState("00:00");
   const [duration, setDuration] = useState("00:00");
   const [playbackRate, setPlaybackRate] = useState(1);
-  const saveAudioFile = useMutation(api.saveAudioFile.saveAudioFile);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -82,25 +79,6 @@ const DownloadAudio: React.FC<DownloadAudioProps> = ({
         audio.duration,
         Math.max(0, audio.currentTime + amount)
       );
-    }
-  };
-
-  const handleSave = async () => {
-    if (!isSignedIn) {
-      alert("You need to be signed in to save the audio file.");
-      return;
-    }
-
-    try {
-      const response = await fetch(audioUrl);
-      const audioData = new Uint8Array(await response.arrayBuffer());
-      const userId = user.id;
-      const fileName = "audio-file.mp3";
-      await saveAudioFile({ userId, fileName, audioData });
-      alert("Audio file saved successfully!");
-    } catch (error) {
-      console.error("Error saving audio file:", error);
-      alert("Failed to save audio file.");
     }
   };
 
@@ -187,13 +165,6 @@ const DownloadAudio: React.FC<DownloadAudioProps> = ({
           </div>
           <audio ref={audioRef} src={audioUrl} className="hidden" />
           <div className="">
-            <button
-              onClick={handleSave}
-              className="w-full my-5 bg-[#f6e067] gap-2 rounded-full text-black px-4 py-2 text-xl font-thin flex items-center justify-center"
-            >
-              <FaDownload />
-              Save Audio
-            </button>
             <button
               onClick={onDownload}
               className="w-full my-5 bg-[#f6e067] gap-2 rounded-full text-black px-4 py-2 text-xl font-thin flex items-center justify-center"
