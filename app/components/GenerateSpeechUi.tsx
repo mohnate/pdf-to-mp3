@@ -33,6 +33,8 @@ const GenerateSpeechUi = () => {
   const [txtErrorMessage, setTxtErrorMessage] = useState("");
   const [pdfErrorMessage, setPdfErrorMessage] = useState("");
 
+  const maxWords = isSignedIn ? 300 : 100;
+
   const generateAudio = useAction(api.generateSpeech.generateAudioAction);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,6 +60,15 @@ const GenerateSpeechUi = () => {
   const handleGenerateFromText = async () => {
     if (!textInput.trim()) {
       setTxtErrorMessage("Please enter text to convert.");
+      return;
+    }
+
+    if (textInput.length > maxWords) {
+      isSignedIn
+        ? setTxtErrorMessage(`The text exceeds the ${maxWords}-word limit.`)
+        : setTxtErrorMessage(
+            `The text exceeds the ${maxWords}-word limit. you need to login`
+          );
       return;
     }
 
@@ -93,6 +104,11 @@ const GenerateSpeechUi = () => {
       return;
     }
 
+    // if (pdfFile && pdfFile.size > 1 * 1024 * 1024) {
+    //   setPdfErrorMessage("The PDF file size exceeds the 1MB limit.");
+    //   return;
+    // }
+
     if (!pdfVoice) {
       setPdfErrorMessage("Please choose a voice to narrate your PDF file.");
       return;
@@ -103,10 +119,21 @@ const GenerateSpeechUi = () => {
       return;
     }
 
+    const text = await extractTextFromPdf(pdfFile);
+    if (text.length > maxWords) {
+      isSignedIn
+        ? setPdfErrorMessage(
+            `The text in you file exceeds the ${maxWords}-word limit.`
+          )
+        : setPdfErrorMessage(
+            `The text exceeds the ${maxWords}-word limit. you need to login`
+          );
+      return;
+    }
+
     setLoading(true);
     setPdfErrorMessage("");
     try {
-      const text = await extractTextFromPdf(pdfFile);
       const buffer = await generateAudio({ input: text, voice: pdfVoice });
       const blob = new Blob([buffer], { type: "audio/mpeg" });
       const url = URL.createObjectURL(blob);
