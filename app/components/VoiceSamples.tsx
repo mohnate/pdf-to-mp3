@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaPlay } from "react-icons/fa";
+import { FaPlay, FaPause } from "react-icons/fa";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -202,7 +202,11 @@ const SampleMp3Voices: React.FC = () => {
                 className="playBtn bg-[#3fcfa4] rounded-full p-4"
                 onClick={() => playSample(sample.url, sample.name)}
               >
-                <FaPlay size={20} />
+                {currentPlaying == sample.name ? (
+                  <FaPause size={20} />
+                ) : (
+                  <FaPlay />
+                )}
               </button>
               <div className="text-gray-500">
                 <h3 className="font-semibold">{sample.name}</h3>
