@@ -5,18 +5,13 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AnnouncementBar from "./AnnouncementBar";
-import Link from "next/link";
-import { FaBars } from "react-icons/fa";
-import Dropdown from "./Dropdown";
 import {
   NavigationMenu,
   NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 
 gsap.registerPlugin(ScrollTrigger);

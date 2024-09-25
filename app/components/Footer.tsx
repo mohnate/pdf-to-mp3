@@ -29,6 +29,8 @@ const Footer = () => {
           <h6 className="font-semibold text-sm">
             Copyright © 2024 - All rights reserved
           </h6>
+          <br />
+          <h1 className="font-semibold text-xs">assemghor.reda@gmail.com</h1>
         </div>
 
         <div className="flex flex-col md:flex-row gap-8">

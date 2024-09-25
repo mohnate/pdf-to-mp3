@@ -30,7 +30,7 @@ const GenerateSpeechUi = () => {
   const [loading, setLoading] = useState(false);
   const [attempts, setAttempts] = useState(0);
   const [showLoginPrompt, setShowLoginPrompt] = useState(false);
-  const [txtErrorMessage, setTxtErrorMessage] = useState("");
+  const [txtErrorMessage, setTxtErrorMessage] = useState<any>(null);
   const [pdfErrorMessage, setPdfErrorMessage] = useState("");
 
   const maxWords = isSignedIn ? 300 : 100;
@@ -93,6 +93,9 @@ const GenerateSpeechUi = () => {
       setAttempts(attempts + 1);
     } catch (error) {
       console.error("Error generating audio:", error);
+      setTxtErrorMessage(
+        "Error: 429 You exceeded your current quota, please check your plan and billing details."
+      );
     } finally {
       setLoading(false);
     }
