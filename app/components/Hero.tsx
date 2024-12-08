@@ -1,12 +1,10 @@
 "use client";
 import gsap from "gsap";
-import { cn } from "../utils/cn";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import React, { FC, useRef } from "react";
+import { FC, useRef } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import Image from "next/image";
-import Header from "./Header";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -64,9 +62,8 @@ export const Hero: FC<HeroPrrops> = ({ generateSpeechRef }) => {
   return (
     <div
       ref={containerRef}
-      className="max-w-full overflow-hidden relative bg-blurry rounded-b-3xl shadow-2xl"
+      className="w-full px-[150px] overflow-hidden relative bg-blurry rounded-b-3xl shadow-2xl"
     >
-      <Header />
       <div className="flex flex-col lg:flex-row">
         <div className="flex flex-col z-30 rela flex-1 justify-center h-full lg:w-1/2 p-8 pb-0">
           <p
@@ -95,14 +92,16 @@ export const Hero: FC<HeroPrrops> = ({ generateSpeechRef }) => {
           </button>
         </div>
 
-        <Image
-          ref={imgRef}
-          src="/3d-bg.png"
-          alt="banner"
-          width={500}
-          height={500}
-          className="rounded-b-3xl lg:rounded-none lg:relative absolute -right-32 lg:right-0"
-        />
+        <div className="-scale-x-100">
+          <Image
+            ref={imgRef}
+            src="/3d-bg.png"
+            alt="banner"
+            width={500}
+            height={500}
+            className="rounded-b-3xl lg:rounded-none lg:relative absolute -right-32 lg:right-0"
+          />
+        </div>
       </div>
     </div>
   );

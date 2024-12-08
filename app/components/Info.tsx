@@ -6,8 +6,8 @@ import { IoLanguageSharp } from "react-icons/io5";
 
 const Info = () => {
   return (
-    <div className="mb-0 pb-0 mx-10">
-      <h1 className="text-gray-500 text-2xl py-4 text-center md:text-left">
+    <div className="relative">
+      <h1 className="text-gray-500 text-4xl font-black">
         AI-Powered Text and PDF to MP3 Conversion
       </h1>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-7xl mx-auto w-full">

@@ -8,54 +8,34 @@ interface FAQItem {
 
 const faqs: FAQItem[] = [
   {
-    question: "What is the Text to MP3 Converter?",
+    question: "What is the PDF to MP3 Converter?",
     answer:
-      "The Text to MP3 Converter is a web application that allows you to convert text input or PDF files into MP3 audio files using a selection of 6 AI voices.",
+      "The PDF to MP3 Converter is a web application that uses AI to convert text from PDF files into MP3 audio files, which can be downloaded for easy listening.",
   },
   {
-    question: "How do I convert text to MP3?",
+    question: "How does the PDF to MP3 conversion work?",
     answer:
-      "To convert text to MP3, simply type or paste your text into the provided text area and select your preferred AI voice. Click the 'Generate Audio' button and the application will create an MP3 file for you to download.",
+      "The application extracts text from the uploaded PDF file and uses AI-powered text-to-speech technology to convert the text into an audio file. The resulting MP3 file can then be downloaded directly from the platform.",
   },
   {
-    question: "Can I convert PDF files to MP3?",
+    question: "Is there a limit to the size of the PDF file I can upload?",
     answer:
-      "Yes, you can convert PDF files to MP3. Upload your PDF document, select your preferred AI voice, and click the 'Generate Audio' button. The application will extract text from the PDF and convert it into an MP3 file.",
+      "Yes, there may be a file size limit depending on the plan you use. Please check the platform's upload guidelines for details on the maximum file size supported.",
   },
   {
-    question: "What AI voices are available?",
+    question: "Can I choose different voices for the audio output?",
     answer:
-      "The application offers 6 AI voices: Alloy, Echo, Fable, Onyx, Nova, and Shimmer. You can choose any of these voices to narrate your text or PDF content.",
+      "Yes, the PDF to MP3 Converter offers a selection of AI voices, allowing you to choose the voice that best suits your preferences for the audio file.",
   },
   {
-    question: "Is the service free to use?",
+    question: "Is my data safe when using the PDF to MP3 Converter?",
     answer:
-      "Yes, the basic functionality of the Text to MP3 Converter is free to use. However, there might be limitations on the number of conversions you can perform daily or the length of text you can convert.",
+      "Yes, we prioritize your privacy and ensure that the uploaded PDF files are processed securely. Files are not stored on our servers after conversion is complete.",
   },
   {
-    question: "How do I download the MP3 file?",
+    question: "Can I use this service for free?",
     answer:
-      "After the conversion is complete, a download link will be provided. Click on the link to download the MP3 file to your device.",
-  },
-  {
-    question: "How can I change the AI voice?",
-    answer:
-      "You can change the AI voice by selecting a different voice from the dropdown menu before generating the audio. Each voice offers a unique tone and style.",
-  },
-  {
-    question: "What should I do if the conversion fails?",
-    answer:
-      "If the conversion fails, please check your input text or PDF file for any issues and try again. If the problem persists, you can contact our support team at support@texttomp3converter.com for assistance.",
-  },
-  {
-    question: "Are there any limitations on the file size or text length?",
-    answer:
-      "There may be limitations on the size of the PDF file or the length of the text that can be converted in a single request. Please refer to our documentation for specific details on these limits.",
-  },
-  {
-    question: "How secure is my data?",
-    answer:
-      "Your data security is our priority. We ensure that all files and text are processed securely and are not stored on our servers after the conversion is complete.",
+      "The basic version of the PDF to MP3 Converter is available for free with limited features. For access to advanced options, including more AI voices and larger file sizes, you can upgrade to a premium plan.",
   },
 ];
 
