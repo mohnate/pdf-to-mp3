@@ -167,7 +167,10 @@ const GenerateSpeechUi = () => {
   };
 
   return (
-    <div className="flex flex-col items-center lg:m-[100px] bg-slate-100 text-gray-500 rounded-3xl m-10">
+    <div
+      id="generate-audio"
+      className="flex flex-col items-center lg:m-40 bg-slate-100 text-gray-500 rounded-3xl m-10"
+    >
       {audioUrl ? (
         <DownloadAudio
           audioUrl={audioUrl}

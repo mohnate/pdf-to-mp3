@@ -7,10 +7,10 @@ import { IoLanguageSharp } from "react-icons/io5";
 const Info = () => {
   return (
     <div className="relative">
-      <h1 className="text-gray-500 text-4xl font-black">
+      <h1 className="text-gray-500 text-4xl font-black opacity-60 p-4">
         AI-Powered Text and PDF to MP3 Conversion
       </h1>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-7xl mx-auto w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 w-full mx-auto lg:px-40 px-4">
         <WobbleCard
           containerClassName="col-span-1 lg:col-span-2  bg-pink-800 min-h-[300px] "
           className="relative flex flex-col"

@@ -62,7 +62,7 @@ export const Hero: FC<HeroPrrops> = ({ generateSpeechRef }) => {
   return (
     <div
       ref={containerRef}
-      className="w-full px-[150px] overflow-hidden relative bg-blurry rounded-b-3xl shadow-2xl"
+      className="w-full lg:px-40 overflow-hidden relative bg-blurry shadow-lg"
     >
       <div className="flex flex-col lg:flex-row">
         <div className="flex flex-col z-30 rela flex-1 justify-center h-full lg:w-1/2 p-8 pb-0">

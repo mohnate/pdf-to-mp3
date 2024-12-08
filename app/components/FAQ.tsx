@@ -47,12 +47,12 @@ const FAQ: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col sm:flex-row justify-center items-start sm:items-center sm:space-x-8 bg-gray-100 p-6 sm:p-12">
-      <div className="w-full sm:w-1/3 mb-6 sm:mb-0">
+    <div className="flex flex-col lg:flex-row lg:justify-center bg-gray-100 lg:px-40 lg:py-10 p-8 gap-4">
+      <div className="mb-6">
         <h1 className="text-sm text-blue-500 font-bold mb-4">FAQ</h1>
         <h2 className="text-2xl font-semibold">Frequently Asked Questions</h2>
       </div>
-      <div className="w-full sm:w-2/3">
+      <div>
         {faqs.map((faq, index) => (
           <div key={index} className="mb-4 border-b-2 border-gray-200 pb-4">
             <div

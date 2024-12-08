@@ -7,14 +7,12 @@ import Header from "./components/Header";
 import { Hero } from "./components/Hero";
 import Info from "./components/Info";
 import SampleMp3Voices from "./components/VoiceSamples";
-import AnnouncementBar from "./components/AnnouncementBar";
 
 const Home = () => {
   const generateSpeechRef = useRef(null);
 
   return (
     <div className="relative bg-pattern">
-      <AnnouncementBar />
       <Header />
       <Hero generateSpeechRef={generateSpeechRef} />
       <Info />
