@@ -15,7 +15,6 @@ import type {
   FunctionReference,
 } from "convex/server";
 import type * as generateSpeech from "../generateSpeech.js";
-import type * as saveAudioFile from "../saveAudioFile.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -27,7 +26,6 @@ import type * as saveAudioFile from "../saveAudioFile.js";
  */
 declare const fullApi: ApiFromModules<{
   generateSpeech: typeof generateSpeech;
-  saveAudioFile: typeof saveAudioFile;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,
